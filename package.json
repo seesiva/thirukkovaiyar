@@ -1,0 +1,9 @@
+{
+  "name": "Thirukkovaiyar",
+  "version": "1.0.0",
+  "description": "Thirukkovaiyar Website",
+  "main": "index.html",
+  "repository": "https://github.com/seesiva/thirukkovaiyar.git",
+  "author": "<seesiva@gmail.com>",
+  "license": "MIT"
+}
