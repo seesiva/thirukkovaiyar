@@ -5,5 +5,9 @@
   "main": "index.html",
   "repository": "https://github.com/seesiva/thirukkovaiyar.git",
   "author": "<seesiva@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-serve": "^1.4.0"
+  }
 }
