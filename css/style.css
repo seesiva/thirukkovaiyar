@@ -20,3 +20,14 @@ p {
       line-height: 1.5;
       margin-bottom: 15px;
       }
+
+#HomeImage
+{
+    display:table;
+}
+#HomeCenterspan
+{
+    vertical-align: middle;
+    display: table-cell;
+    font-weight: bold;
+}
