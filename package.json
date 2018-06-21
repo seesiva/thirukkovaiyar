@@ -9,5 +9,9 @@
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-serve": "^1.4.0"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
