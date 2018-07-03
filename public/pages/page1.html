@@ -5,14 +5,44 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
 </head>
+<script>
+$(document).ready(function () {
+    $.getJSON('/data/data.json', function (data) {
+      console.log(data);
+      var wantedData = data.kovai.songs.filter(function(i) {
+         return i.Id === 1;
+    });
+    console.log(wantedData[0])
+    renderIlakkiyamData(wantedData)
+    renderPadal(wantedData)
+    function renderIlakkiyamData(wantedData){
+        for (var key in wantedData[0].Ilakkiyam){
+            $('#Ilakiyam').append('<li class="list-group-item"><small>'+key+":"+wantedData[0].Ilakkiyam[key]+'</small></li>');
+        }
+    }
+    function renderPadal(wantedData){
+        $('#Moolam').html('');
+        for (var key in wantedData[0].padal){
+            $('#Moolam').append('<b class="card-title">'+key+'</b><br/>');
+            for (line in wantedData[0].padal[key]){
+               $('#Moolam').append('<pre style="font-size:12px;display:inline;">'+wantedData[0].padal[key][line]+'</pre><br/>');
+            }
+            $('#Moolam').append('<br/>');
+        }
+    }
 
+  });
+});
+</script>
 <body>
     <!-- <div class="header">
                 <img src="../img/amma.jpg" style="width:1%"/>
@@ -39,17 +69,16 @@
        
     </nav>
     <div class="row">
-
         <div class="card" style="width: 18rem;">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item active">
+            <ul class="list-group list-group-flush" id="Ilakiyam">
+                <li class="list-group-item active" >
                     <center>
                         <small>
                             <b>கோவை இலக்கியம்</b>
                         </small>
                     </center>
                 </li>
-                <li class="list-group-item">
+                <!-- <li class="list-group-item" id="agaporul">
                     <small>அகப்பொருள்: களவு</small>
                 </li>
                 <li class="list-group-item">
@@ -60,36 +89,25 @@
                 </li>
                 <li class="list-group-item">
                     <small>துறை விளக்கம்: தலைவியை தலைவன் கண்ணுற்று வியப்புறுதல் </small>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="col">
             <div class="col-md-3">
                 <div class="card" style="width: 40rem;">
-                    <div class="card-body">
-                        <b class="card-title">மூலம்</b>
-                        <pre style="font-size:12px">
-திருவளர் தாமரை சீர்வளர் காவிக ளீசர்தில்லைக்
-குருவளர் பூங்குமிழ் கோங்குபைங் காந்தள்கொண் டோங்குதெய்வ      
-மருவளர் மாலையொர் வல்லியி னொல்கி யனநடைவாய்ந்து
-உருவளர் காமன்றன் வென்றிக் கொடிபோன் றொளிர்கின்றதே.</pre>
+                    <div class="card-body" >
+                        <div id="Moolam">
+                        
+                        <!-- <pre style="font-size:12px;display:inline;">திருவளர் தாமரை சீர்வளர் காவிக ளீசர்தில்லைக்</pre>
+                            <pre style="font-size:12px;display:inline;">குருவளர் பூங்குமிழ் கோங்குபைங் காந்தள்கொண் டோங்குதெய்வ </pre>     
+                                <pre style="font-size:12px;display:inline;">மருவளர் மாலையொர் வல்லியி னொல்கி யனநடைவாய்ந்து</pre>
+                                    <pre style="font-size:12px;display:inline;">உருவளர் காமன்றன் வென்றிக் கொடிபோன் றொளிர்கின்றதே.</pre> -->
+                                </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="card" style="width: 40rem;">
-                    <div class="card-body">
-                        <b class="card-title">பதம் பிரித்து</b>
-                        <pre style="font-size:12px">
-திருவளர் தாமரை சீர்வளர் காவிகள் ஈசர்தில்லைக்
-குருவளர் பூங்குமிழ் கோங்குபைங் காந்தள்கொண்டு ஓங்குதெய்வ
-மருவளர் மாலை ஓர் வல்லியின் ஒல்கி அனநடை வாய்ந்து
-உருவளர் காமன்தன் வென்றிக் கொடிபோன்று ஒளிர்கின்றதே</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
             <div class="col">
             <div class="card" style="width: 18rem;">
                     <div class="card-header">
