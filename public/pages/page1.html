@@ -30,7 +30,7 @@
         $('#Ilakiyam').html('');
         $('#Ilakiyam').append('<li class="list-group-item active"><center><small><b>கோவை இலக்கியம்</b></small></center></li>');
         for (var key in wantedData[0].Ilakkiyam) {
-            $('#Ilakiyam').append('<li class="list-group-item"><small>' + key + ":" + wantedData[0].Ilakkiyam[key] + '</small></li>');
+            $('#Ilakiyam').append('<li class="list-group-item"><b class="card-title">' + key + ":</b>&nbsp;<small>" + wantedData[0].Ilakkiyam[key] + '</small></li>');
         }
     }
     function renderPorul(wantedData) {
@@ -38,7 +38,7 @@
 
         for (var key in wantedData[0].Porul) {
             console.log(key)
-            $('#Porul').append('<li class="list-group-item"><small>' + key + " : " + wantedData[0].Porul[key] + '</small></li>');
+            $('#Porul').append('<li class="list-group-item"><b class="card-title">' + key + " :</b>&nbsp; <small>" + wantedData[0].Porul[key] + '</small></li>');
         }
     }
     function renderPadal(wantedData) {
@@ -76,75 +76,69 @@
 
         });
 
-    $(".pagebu").click(function () {
-        console.log(this.id);
-        if (this.id === 'last') {
-            var numItems = 400;
-            var data_last = parseInt($('#last-value').val());
-            console.log(numItems);
-            $('#pagenovalue').val(numItems);
-            $('#last-value').val(numItems);
-            filter_data(numItems);
-
-        }
-        else if (this.id === 'first') {
-            var data_last = parseInt($('#last-value').val());
-            console.log(1);
-            filter_data(1);
-            $('#pagenovalue').val(1);
-
-            $('#last-value').val(1);
-        }
-        else if (this.id == 'previous') {
-            var data_last = parseInt($('#last-value').val());
-            if (data_last != 1) {
-
-                var prev_data = data_last - 1;
-                console.log(prev_data);
-                $('#last-value').val(prev_data);
-            $('#pagenovalue').val(prev_data);
-
-                filter_data(prev_data);
+        $(".pagebu").click(function () {
+            console.log(this.id);
+            if (this.id === 'last') {
+                var numItems = 400;
+                var data_last = parseInt($('#last-value').val());
+                console.log(numItems);
+                $('#pagenovalue').val(numItems);
+                $('#last-value').val(numItems);
+                filter_data(numItems);
 
             }
-        }
-        else if (this.id === 'next') {
-            var data_last = parseInt($('#last-value').val());
-            if (data_last != 400) {
-                var next_data = data_last + 1;
-                console.log(next_data);
-            $('#pagenovalue').val(next_data);
+            else if (this.id === 'first') {
+                var data_last = parseInt($('#last-value').val());
+                console.log(1);
+                filter_data(1);
+                $('#pagenovalue').val(1);
 
-                $('#last-value').val(next_data);
-                filter_data(next_data);
+                $('#last-value').val(1);
+            }
+            else if (this.id == 'previous') {
+                var data_last = parseInt($('#last-value').val());
+                if (data_last != 1) {
+
+                    var prev_data = data_last - 1;
+                    console.log(prev_data);
+                    $('#last-value').val(prev_data);
+                    $('#pagenovalue').val(prev_data);
+
+                    filter_data(prev_data);
+
+                }
+            }
+            else if (this.id === 'next') {
+                var data_last = parseInt($('#last-value').val());
+                if (data_last != 400) {
+                    var next_data = data_last + 1;
+                    console.log(next_data);
+                    $('#pagenovalue').val(next_data);
+
+                    $('#last-value').val(next_data);
+                    filter_data(next_data);
+
+                }
 
             }
-
-        }
+        });
+        $(".pagebu1").change(function () {
+            var data_last = parseInt($('#last-value').val());
+            console.log(this.value);
+            $('#pagenovalue').val(this.value);
+            filter_data(this.value);
+            $('#last-value').val(parseInt(this.value));
+        });
     });
-    $(".pagebu1").change(function () {
-        var data_last = parseInt($('#last-value').val());
-        console.log(this.value);
-        $('#pagenovalue').val(this.value);
-        filter_data(this.value);
-        $('#last-value').val(parseInt(this.value));
-    });
-});
 </script>
 
 <body>
     <div class="row">
         <div class="container-fluid">
-            <!-- <div class="header">
-                <img src="../img/amma.jpg" style="width:1%"/>
-                <h3 id="logo" align="left">திருக்கோவையார்</h3>
-
-        </div> -->
-            <nav class="navbar navbar-dark bg-primary">
+            <nav class="navbar navbar-dark bg-primary fixed">
                 <a class="navbar-brand" href="../index.html">
                     <b>திருக்கோவையார்</b>
                 </a>
-
                 <ul class="pagination float-right">
                     <li class="page-item">
                         <a class="page-link active pagebu" id="first" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
@@ -157,7 +151,7 @@
                         </a>
                     </li>
                     <li class="page-item">
-                        <input type="number" max="400" min="1" style="width:6ex;height: 4ex;" value="" id="pagenovalue" class="pagebu1 text-center"
+                        <input type="number" max="400" min="1" style="width:9ex;height: 34px;" value="" id="pagenovalue" class="pagebu1 form-control text-center"
                         />
                         <input type="hidden" id="last-value" />
 
@@ -173,10 +167,9 @@
                             <i class="fa fa-angle-double-right"></i>
                         </a>
                     </li>
-
                 </ul>
-
             </nav>
+
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -191,100 +184,79 @@
                         </ul>
                     </div>
                 </ol>
-
             </nav>
-
-            <div class="row">
-                <div class="col">
-
-                    <div class="card">
-                        <ul class="list-group list-group-flush" id="Ilakiyam">
-                            
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col">
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="Padal">
-                            </div>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <audio controls>
-                                <source src="../audio/VinayagarPa.mp3" type="audio/mpeg"> Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col">
-
-                    <div class="card">
-                        <div class="card-header">
-                            பொருள்
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                <ul class="list-group list-group-flush" id="Porul">
-
-                                </ul>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- <div class="row" style="margin-left: 10px;padding-top: 10px">
-            <p>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">விளக்கம்</a>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">வசன நடை</button>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">சில குறிப்புகள்</button>
-                  </p>
-                  <div class="row">
-                    <div class="col">
-                      <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <div class="card card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <div class="card card-body">
-                                தலைவர்: வசீகரிக்க கூடிய வளர்கின்ற தாமரை போன்ற முகமும், அழகு பொருந்திய நீல நிற  பூக்கள் போன்ற  கண்களும் , ஈசர்  விளங்கியிருக்கும் தில்லையில்  பூத்த குமிழ்  மலர் போன்ற மூக்கும், கோங்க மலரை போன்ற மார்பும், காந்தள் மலர் போன்ற கைகளும் ஒருங்கே சேர்ந்து ஒரு மாலையாக, மின்னலை போன்று அசைந்து, அன்ன நடையிட்டு காமனை வெல்கின்ற கோடி போல விளங்குகின்ற தலைவியை பார்க்க வியப்பாக உள்ளதே ?
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-    </div> -->
-            <br/>
-            <div class="row">
-                <div class="container-fluid">
-                    <div class="card">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+
+            <div class="col col-lg-3">
+
+                <div class="card">
+                    <ul class="list-group list-group-flush" id="Ilakiyam">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="Padal">
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <audio controls>
+                            <source src="../audio/VinayagarPa.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-lg-3">
+                <div class="card">
+                    <li class="list-group-item active">
+                        <center>
+                            <small>
+                                <b>பொருள்
+                                </b>
+                            </small>
+                        </center>
+                    </li>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <ul class="list-group list-group-flush" id="Porul">
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="container">
+            <div class="card">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    </div>
+                </nav>
+                <div class="card-body">
+                    <div class="tab-content" id="nav-tabContent">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <div class="container-fluid">
     <div id="footer navbar-fixed-bottom">
         <footer>
-            <hr/><b>நால்வர் பொற்றாள் எம் உயிர்த்துணையே!! பேயார் அடி போற்றும் சிவோன்மத்தன் திருக்கோவையாரில் பித்துப் பிடித்த திருக்கூட்டம்,
-            திருச்சிராப்பள்ளி.</b>
+            <hr/>
+            <b>நால்வர் பொற்றாள் எம் உயிர்த்துணையே!! பேயார் அடி போற்றும் சிவோன்மத்தன் திருக்கோவையாரில் பித்துப் பிடித்த திருக்கூட்டம்,
+                திருச்சிராப்பள்ளி.
+            </b>
         </footer>
     </div>
 </div>
