@@ -1,0 +1,137 @@
+@import "variables";
+
+.conentfluid {
+    width: 100%;
+    float: left;
+
+    .container {
+        margin: 0px auto;
+
+        #poemref, #HomeImage{
+            position: relative;
+            width: 100%;
+            float: left;
+
+            .left{
+                .make-sm-column(4);
+                text-align: center;
+            
+                img{
+                    height: 250px;
+                    width: auto;
+
+                    @media (max-width: @screen-xs-max){
+                        height: auto;
+                        width: 90%;
+                        margin: 0px auto;
+                    }
+                }
+            }
+            .right{
+                .make-sm-column(7);
+
+                @media (max-width: @screen-xs-max) {
+                    float: left;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                .content {
+                    font-size: 21px;
+                    line-height: 35px;
+                    .padding(14px 0);
+
+                    @media (max-width: @screen-xs-max){
+                        text-align: center;
+                        font-size: 14px;
+                        line-height: 25px;
+                    }
+
+                    b{
+                        color: @orange;
+                    }
+
+                    audio {
+                        margin-top: 30px;
+
+                        @media (max-width: @screen-xs-max){
+                            margin-top: 20px;
+                            width: 80%;
+                        }
+                    }
+                }
+
+                .button{
+
+                    @media (max-width: @screen-xs-max){
+                        width: 100%;
+                        float: left;
+                        display: flex;
+                        justify-content: center;
+                    }
+
+                    a {
+                        width: 21%;
+                        float: left;
+                        margin-right: 20px;
+                        margin-top: 20px;
+                        background-color: @orange;
+                        color: @white;
+                        font-size: 16px;
+                        font-weight: 800;
+                        .padding(11px);
+                        display: block;
+                        text-align: center;
+                        text-decoration: none;
+                        .border-radius(25px);
+                        -webkit-transition: 0.3s;
+                        -moz-transition: 0.3s;
+                        -o-transition: 0.3s;
+                        transition: 0.3s;
+
+                        &:hover {
+                            background-color: @dark-brown;
+                        }
+
+                        @media (max-width: @screen-xs-max){
+                            width: auto;
+                            margin-top: 0px;
+                            font-size: 14px;
+                            .padding(10px 30px);
+
+                            &:nth-child(2){
+                                margin-right: 0px;
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            h3 {
+                text-align: center;
+                margin: 40px 0;
+                float: left;
+                width: 100%;
+
+                @media (max-width: @screen-xs-max){
+                    margin: 20px 0;
+                }
+            }
+
+            .sub-contnet {
+                float: left;
+                width: 100%;
+
+                .left{
+                    img {
+                        .border-radius(0px 40px);
+                        box-shadow: 0px 2px 9px #333;
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
