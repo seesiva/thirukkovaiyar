@@ -20,11 +20,12 @@
         var wantedData = data_covai.kovai.songs.filter(function (i) {
             return i.Id === param;
         });
-        console.log(wantedData[0])
+        //console.log(wantedData[0])
         renderIlakkiyamData(wantedData)
         renderPadal(wantedData)
         renderPorul(wantedData)
         renderInfo(wantedData)
+        setbreadcrumb(wantedData)
     }
     function renderIlakkiyamData(wantedData) {
         $('#Ilakiyam').html('');
@@ -33,11 +34,18 @@
             $('#Ilakiyam').append('<li class="list-group-item"><b class="card-title">' + key + ":</b>&nbsp;<small>" + wantedData[0].Ilakkiyam[key] + '</small></li>');
         }
     }
+    function setbreadcrumb(wantedData)
+    {
+        $('#b_adhiharam').html('');
+        $('#b_keelavi').html('');
+        $('#b_adhiharam').append('<a href="#">'+wantedData[0].Ilakkiyam.அதிகாரம்+'</a>');
+        $('#b_keelavi').append('கிளவி எண்:'+wantedData[0].Id);
+    }
     function renderPorul(wantedData) {
         $('#Porul').html('');
 
         for (var key in wantedData[0].Porul) {
-            console.log(key)
+            //console.log(key)
             $('#Porul').append('<li class="list-group-item"><b class="card-title">' + key + " :</b>&nbsp; <small>" + wantedData[0].Porul[key] + '</small></li>');
         }
     }
@@ -54,7 +62,7 @@
     function renderInfo(wantedData) {
         $('#nav-tab').html('');
         $('#nav-tabContent').html('');
-        console.log(wantedData[0].Info)
+        //console.log(wantedData[0].Info)
         count = 0
         for (var key in wantedData[0].Info) {
             count = count + 1
@@ -71,17 +79,17 @@
         $('#pagenovalue').val(1);
         $.getJSON('/data/data.json', function (data) {
             data_covai = data;
-            console.log(data);
+            //console.log(data);
             filter_data(1);
 
         });
 
         $(".pagebu").click(function () {
-            console.log(this.id);
+            //console.log(this.id);
             if (this.id === 'last') {
                 var numItems = 400;
                 var data_last = parseInt($('#last-value').val());
-                console.log(numItems);
+                //console.log(numItems);
                 $('#pagenovalue').val(numItems);
                 $('#last-value').val(numItems);
                 filter_data(numItems);
@@ -89,7 +97,7 @@
             }
             else if (this.id === 'first') {
                 var data_last = parseInt($('#last-value').val());
-                console.log(1);
+                //console.log(1);
                 filter_data(1);
                 $('#pagenovalue').val(1);
 
@@ -100,7 +108,7 @@
                 if (data_last != 1) {
 
                     var prev_data = data_last - 1;
-                    console.log(prev_data);
+                    //console.log(prev_data);
                     $('#last-value').val(prev_data);
                     $('#pagenovalue').val(prev_data);
 
@@ -112,7 +120,7 @@
                 var data_last = parseInt($('#last-value').val());
                 if (data_last != 400) {
                     var next_data = data_last + 1;
-                    console.log(next_data);
+                    //console.log(next_data);
                     $('#pagenovalue').val(next_data);
 
                     $('#last-value').val(next_data);
@@ -124,7 +132,7 @@
         });
         $(".pagebu1").change(function () {
             var data_last = parseInt($('#last-value').val());
-            console.log(this.value);
+            //console.log(this.value);
             $('#pagenovalue').val(this.value);
             filter_data(this.value);
             $('#last-value').val(parseInt(this.value));
@@ -175,14 +183,10 @@
                     <li class="breadcrumb-item">
                         <a href="../index.html">முகப்பு</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        <a href="#">இயற்கைப் புணர்ச்சி</a>
+                    <li class="breadcrumb-item" id='b_adhiharam'>
+                        
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">கிளவி எண்: 1</li>
-                    <div class="float-right pagination">
-
-                        </ul>
-                    </div>
+                    <li class="breadcrumb-item active" aria-current="page" id="b_keelavi"></li>
                 </ol>
             </nav>
         </div>
