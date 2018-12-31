@@ -71,14 +71,9 @@
         $('#info-nav1').addClass('show active');
 
     }
-	$(window).on("beforeunload", function() { 
-    alert('dada');
-return false;	
-});
+
     $(document).ready(function () {
-$(window).on("beforeunload", function() { 
-    return inFormOrLink ? "Do you really want to close?" : null; 
-});
+
         $.getJSON('/data/data.json', function (data) {
             data_covai = data;
 			
