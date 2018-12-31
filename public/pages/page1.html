@@ -20,7 +20,6 @@
         var wantedData = data_covai.kovai.songs.filter(function (i) {
             return i.Id === param;
         });
-        //console.log(wantedData[0])
         renderIlakkiyamData(wantedData)
         renderPadal(wantedData)
         renderPorul(wantedData)
@@ -45,7 +44,6 @@
         $('#Porul').html('');
 
         for (var key in wantedData[0].Porul) {
-            //console.log(key)
             $('#Porul').append('<li class="list-group-item"><b class="card-title">' + key + " :</b>&nbsp; <small>" + wantedData[0].Porul[key] + '</small></li>');
         }
     }
@@ -62,7 +60,6 @@
     function renderInfo(wantedData) {
         $('#nav-tab').html('');
         $('#nav-tabContent').html('');
-        //console.log(wantedData[0].Info)
         count = 0
         for (var key in wantedData[0].Info) {
             count = count + 1
@@ -74,67 +71,70 @@
         $('#info-nav1').addClass('show active');
 
     }
+
     $(document).ready(function () {
-        $('#last-value').val(1);
-        $('#pagenovalue').val(1);
+
         $.getJSON('/data/data.json', function (data) {
             data_covai = data;
-            //console.log(data);
-            filter_data(1);
+			
+			if(localStorage.hasOwnProperty('pageno')==false)
+			{
+				filter_data(1);
+				$('#pagenovalue').val(1);
+				$('#last-value').val(1);
+			}
+            else
+			{
+				filter_data(JSON.parse(localStorage.getItem('pageno')));
+				$('#pagenovalue').val(JSON.parse(localStorage.getItem('pageno')));
+				$('#last-value').val(JSON.parse(localStorage.getItem('pageno')));
+			}
 
         });
 
         $(".pagebu").click(function () {
-            //console.log(this.id);
             if (this.id === 'last') {
                 var numItems = 400;
                 var data_last = parseInt($('#last-value').val());
-                //console.log(numItems);
                 $('#pagenovalue').val(numItems);
                 $('#last-value').val(numItems);
                 filter_data(numItems);
+				localStorage.setItem('pageno',numItems);
 
             }
             else if (this.id === 'first') {
                 var data_last = parseInt($('#last-value').val());
-                //console.log(1);
+				localStorage.setItem('pageno',1);
                 filter_data(1);
                 $('#pagenovalue').val(1);
-
                 $('#last-value').val(1);
             }
             else if (this.id == 'previous') {
                 var data_last = parseInt($('#last-value').val());
                 if (data_last != 1) {
-
                     var prev_data = data_last - 1;
-                    //console.log(prev_data);
+					localStorage.setItem('pageno',prev_data);
                     $('#last-value').val(prev_data);
                     $('#pagenovalue').val(prev_data);
-
                     filter_data(prev_data);
-
                 }
             }
             else if (this.id === 'next') {
                 var data_last = parseInt($('#last-value').val());
                 if (data_last != 400) {
                     var next_data = data_last + 1;
-                    //console.log(next_data);
                     $('#pagenovalue').val(next_data);
-
+					localStorage.setItem('pageno',next_data);
                     $('#last-value').val(next_data);
                     filter_data(next_data);
-
                 }
-
             }
         });
         $(".pagebu1").change(function () {
             var data_last = parseInt($('#last-value').val());
-            //console.log(this.value);
-            $('#pagenovalue').val(this.value);
-            filter_data(this.value);
+            $('#pagenovalue').val(parseInt(this.value));
+            filter_data(parseInt(this.value));
+			localStorage.setItem('pageno',parseInt(this.value));
             $('#last-value').val(parseInt(this.value));
         });
     });
